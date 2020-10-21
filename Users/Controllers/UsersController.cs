@@ -1,0 +1,42 @@
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Users.Domain;
+using Users.ExternalDependencies;
+
+namespace Users.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class UsersController : ControllerBase
+    {
+        private readonly IUsersStorageFacade _usersStorage;
+        private readonly IInvoicesFacade _invoices;
+
+        public UsersController(IUsersStorageFacade usersStorage, IInvoicesFacade invoices)
+        {
+            _usersStorage = usersStorage;
+            _invoices = invoices;
+        }
+
+        /// <summary>Gets information on a user, including any associated invoices if requested.</summary>
+        /// <param name="userId">The ID of the requested user.</param>
+        /// <param name="includeInvoices">True if any associated invoices must be included; otherwise, false.</param>
+        /// <returns>The requested user if found; otherwise, a NotFound status code.</returns>
+        [HttpGet]
+        [Produces(typeof(User))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<User>> Get(int userId, bool includeInvoices = true)
+        {
+            User user = await _usersStorage.GetUserByIdAsync(userId);
+            if (user == null) 
+                return NotFound();
+
+            user.Address = await _usersStorage.GetAddressByUserIdAsync(userId);
+            if (includeInvoices)
+                user.Invoices = await _invoices.GetInvoicesByUserIdAsync(userId);
+
+            return user;
+        }
+    }
+}
