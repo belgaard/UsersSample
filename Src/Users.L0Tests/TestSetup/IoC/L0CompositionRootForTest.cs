@@ -1,0 +1,28 @@
+﻿using LeanTest.Mock;
+using Microsoft.Extensions.DependencyInjection;
+using Users.Domain;
+using Users.ExternalDependencies;
+using Users.L0Tests.Mocks;
+using Users.StorageAccess;
+
+namespace Users.L0Tests.TestSetup.IoC
+{
+    public static class L0CompositionRootForTest
+    {
+        public static void Initialize(IServiceCollection serviceCollection)
+        {
+            // Mock-for-data:
+            serviceCollection.RegisterMockForData<IUsersStorageFacade, MockForDataUsersStorageFacade, UserRow, Address>();
+        }
+
+        private static void RegisterMockForData<TInterface, TImplementation, TData1, TData2>(this IServiceCollection container) 
+            where TImplementation: class, TInterface, IMockForData<TData1>, IMockForData<TData2>
+            where TInterface: class
+        {
+            container.AddSingleton<TImplementation>();
+            container.AddSingleton<TInterface>(x => x.GetRequiredService<TImplementation>());
+            container.AddSingleton<IMockForData<TData1>>(x => x.GetRequiredService<TImplementation>());
+            container.AddSingleton<IMockForData<TData2>>(x => x.GetRequiredService<TImplementation>());
+        }
+    }
+}

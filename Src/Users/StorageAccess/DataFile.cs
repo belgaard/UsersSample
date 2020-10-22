@@ -17,7 +17,7 @@ namespace Users.StorageAccess
             return o switch
             {
                 Address _ => await ReadTypedDataFromFileAsync<T>("Addresses.json"),
-                User _ => await ReadTypedDataFromFileAsync<T>("Users.json"),
+                UserRow _ => await ReadTypedDataFromFileAsync<T>("Users.json"),
                 Invoice _ => await ReadTypedDataFromFileAsync<T>("Invoices.json"),
                 _ => default
             };

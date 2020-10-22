@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Users.Domain;
 using Users.ExternalDependencies;
+using Users.StorageAccess;
 
 namespace Users.Controllers
 {
@@ -28,9 +29,11 @@ namespace Users.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<User>> Get(int userId, bool includeInvoices = true)
         {
-            User user = await _usersStorage.GetUserByIdAsync(userId);
-            if (user == null) 
+            UserRow userRow = await _usersStorage.GetUserByIdAsync(userId);
+            if (userRow == null) 
                 return NotFound();
+
+            User user = new User { UserId = userRow.UserId, Name = userRow.Name };
 
             user.Address = await _usersStorage.GetAddressByUserIdAsync(userId);
             if (includeInvoices)
