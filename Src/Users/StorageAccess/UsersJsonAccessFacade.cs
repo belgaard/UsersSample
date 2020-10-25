@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Users.Domain;
 using Users.ExternalDependencies;
 
 namespace Users.StorageAccess
@@ -10,12 +9,7 @@ namespace Users.StorageAccess
         public async Task<UserRow> GetUserByIdAsync(int userId) => 
             (await DataFile.ReadFromFileAsync<UserRow>()).FirstOrDefault(a => a.UserId == userId);
 
-        public async Task<Address> GetAddressByUserIdAsync(int userId) => 
-            (await DataFile.ReadFromFileAsync<Address>()).FirstOrDefault(a => a.UserId == userId);
-    }
-    public class UserRow
-    {
-        public int UserId { get; set; }
-        public string Name { get; set; }
+        public async Task<AddressRow> GetAddressByUserIdAsync(int userId) => 
+            (await DataFile.ReadFromFileAsync<AddressRow>()).FirstOrDefault(a => a.UserId == userId);
     }
 }

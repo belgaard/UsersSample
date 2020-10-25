@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Users.ExternalDependencies;
-using Users.ExternalServiceAccess;
 using Users.StorageAccess;
 
 namespace Users

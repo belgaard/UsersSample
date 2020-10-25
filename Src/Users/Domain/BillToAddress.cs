@@ -1,4 +1,4 @@
-﻿namespace Users.ExternalDependencies
+﻿namespace Users.Domain
 {
     public class BillToAddress
     {

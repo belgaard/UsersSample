@@ -27,17 +27,19 @@ namespace Users.Controllers
         [HttpGet]
         [Produces(typeof(User))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<User>> Get(int userId, bool includeInvoices = true)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<User>> Get(int userId, bool includeInvoices)
         {
             UserRow userRow = await _usersStorage.GetUserByIdAsync(userId);
             if (userRow == null) 
                 return NotFound();
+            User user = userRow.Convert();
 
-            User user = new User { UserId = userRow.UserId, Name = userRow.Name };
+            user.Address = (await _usersStorage.GetAddressByUserIdAsync(userId)).Convert();
 
-            user.Address = await _usersStorage.GetAddressByUserIdAsync(userId);
-            if (includeInvoices)
-                user.Invoices = await _invoices.GetInvoicesByUserIdAsync(userId);
+            if (!includeInvoices) 
+                return user;
+            user.Invoices = (await _invoices.GetInvoicesByUserIdAsync(userId)).Convert(userId);
 
             return user;
         }

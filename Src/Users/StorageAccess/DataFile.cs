@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Users.Domain;
+using Users.ExternalDependencies;
 
 namespace Users.StorageAccess
 {
@@ -16,9 +16,9 @@ namespace Users.StorageAccess
             T o = new T();
             return o switch
             {
-                Address _ => await ReadTypedDataFromFileAsync<T>("Addresses.json"),
+                AddressRow _ => await ReadTypedDataFromFileAsync<T>("Addresses.json"),
                 UserRow _ => await ReadTypedDataFromFileAsync<T>("Users.json"),
-                Invoice _ => await ReadTypedDataFromFileAsync<T>("Invoices.json"),
+                InvoiceDto _ => await ReadTypedDataFromFileAsync<T>("Invoices.json"),
                 _ => default
             };
         }
