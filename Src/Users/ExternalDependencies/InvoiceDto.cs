@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Users.Domain;
-using Users.ExternalDependencies;
 
-namespace Users.ExternalServiceAccess
+namespace Users.ExternalDependencies
 {
     public class InvoiceDto
     {

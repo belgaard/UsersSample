@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Users.ExternalDependencies;
 using Users.StorageAccess;
 
-namespace Users.ExternalServiceAccess
+namespace Users.ExternalDependencies
 {
     public class InvoicesService : IInvoicesFacade
     {

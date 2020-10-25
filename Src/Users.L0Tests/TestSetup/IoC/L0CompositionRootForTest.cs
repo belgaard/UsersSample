@@ -12,6 +12,16 @@ namespace Users.L0Tests.TestSetup.IoC
         {
             // Mock-for-data:
             serviceCollection.RegisterMockForData<IUsersStorageFacade, MockForDataUsersStorageFacade, UserRow, AddressRow>();
+            serviceCollection.RegisterMockForData<IInvoicesFacade, MockForDataInvoicesFacade, InvoiceDto>();
+        }
+
+        private static void RegisterMockForData<TInterface, TImplementation, TData>(this IServiceCollection container) 
+            where TImplementation: class, TInterface, IMockForData<TData>
+            where TInterface: class
+        {
+            container.AddSingleton<TImplementation>();
+            container.AddSingleton<TInterface>(x => x.GetRequiredService<TImplementation>());
+            container.AddSingleton<IMockForData<TData>>(x => x.GetRequiredService<TImplementation>());
         }
 
         private static void RegisterMockForData<TInterface, TImplementation, TData1, TData2>(this IServiceCollection container) 

@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Users.ExternalServiceAccess;
+using Users.ExternalDependencies;
 
 namespace Users.StorageAccess
 {

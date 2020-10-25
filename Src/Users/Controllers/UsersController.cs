@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Users.Domain;
 using Users.ExternalDependencies;
-using Users.ExternalServiceAccess;
 using Users.StorageAccess;
 
 namespace Users.Controllers
@@ -30,20 +27,19 @@ namespace Users.Controllers
         [HttpGet]
         [Produces(typeof(User))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<User>> Get(int userId, bool includeInvoices = true)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<User>> Get(int userId, bool includeInvoices)
         {
             UserRow userRow = await _usersStorage.GetUserByIdAsync(userId);
             if (userRow == null) 
                 return NotFound();
-            User user = new User { UserId = userRow.UserId, Name = userRow.Name };
+            User user = userRow.Convert();
 
-            AddressRow addressRow = await _usersStorage.GetAddressByUserIdAsync(userId);
-            user.Address = new Address {StreetAddress = addressRow?.StreetAddress};
+            user.Address = (await _usersStorage.GetAddressByUserIdAsync(userId)).Convert();
 
             if (!includeInvoices) 
                 return user;
-            List<InvoiceDto> invoiceDtos = await _invoices.GetInvoicesByUserIdAsync(userId);
-            user.Invoices = (from dto in invoiceDtos where dto.UserId == userId select new Invoice {BillToAddress = dto.BillToAddress, InvoiceLines = dto.InvoiceLines}).ToList();
+            user.Invoices = (await _invoices.GetInvoicesByUserIdAsync(userId)).Convert(userId);
 
             return user;
         }
