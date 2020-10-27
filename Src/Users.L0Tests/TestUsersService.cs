@@ -1,13 +1,13 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 using LeanTest;
 using LeanTest.Core.ExecutionHandling;
 using LeanTest.Xunit;
 using Users.Domain;
-using Users.StorageAccess;
+using Users.L0Tests.Builders;
+using Users.L0Tests.Extensions;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -70,22 +70,5 @@ namespace Users.L0Tests
                 () => Assert.Equal(userId, actualUser.UserId),
                 () => Assert.Equal(userName, actualUser.Name));
         }
-    }
-
-    internal class UserRowBuilder
-    {
-        private int _userId;
-        private string _name;
-
-        public UserRowBuilder WithUserId(int userId) { _userId = userId; return this; }
-        public UserRowBuilder WithName(string name) { _name = name; return this; }
-
-        public UserRow Build() => new UserRow{UserId = _userId, Name=_name};
-    }
-
-    internal static class HttpResponseMessageExtensions
-    {
-        internal static async Task<T> Deserialize<T>(this HttpResponseMessage message) => 
-            JsonSerializer.Deserialize<T>(await message.Content.ReadAsStringAsync(), new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
     }
 }
