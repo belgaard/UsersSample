@@ -28,8 +28,12 @@ namespace Users.Controllers
         [Produces(typeof(User))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public async Task<ActionResult<User>> Get(int userId, bool includeInvoices)
         {
+            if (userId <= 0)
+                return UnprocessableEntity();
+
             UserRow userRow = await _usersStorage.GetUserByIdAsync(userId);
             if (userRow == null) 
                 return NotFound();
