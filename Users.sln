@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{DE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentations", "Presentations", "{4EBACD0A-8E4F-41EE-B546-4035337541A4}"
 	ProjectSection(SolutionItems) = preProject
-		Doc\Presentations\Test plans.md = Doc\Presentations\Test plans.md
+		Doc\Presentations\Writing test plans.md = Doc\Presentations\Writing test plans.md
 	EndProjectSection
 EndProject
 Global
