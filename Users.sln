@@ -20,6 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{DE
 		Doc\Diagrams\Simplified architecture.md = Doc\Diagrams\Simplified architecture.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentations", "Presentations", "{4EBACD0A-8E4F-41EE-B546-4035337541A4}"
+	ProjectSection(SolutionItems) = preProject
+		Doc\Presentations\Test plans.md = Doc\Presentations\Test plans.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8932CB44-2378-41B7-B7F8-7FC8BD11E2F4} = {47AD7957-9EF7-4F57-8078-70E0E82E5181}
 		{DEC063BD-0706-427A-ABEF-085761A6C47E} = {47AD7957-9EF7-4F57-8078-70E0E82E5181}
+		{4EBACD0A-8E4F-41EE-B546-4035337541A4} = {47AD7957-9EF7-4F57-8078-70E0E82E5181}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {602FEBEF-C35E-42D0-BB6A-EA7A084901F0}
