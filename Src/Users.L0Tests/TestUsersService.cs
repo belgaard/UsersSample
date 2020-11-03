@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using LeanTest;
+using LeanTest.Attribute;
 using LeanTest.Core.ExecutionHandling;
 using LeanTest.Xunit;
 using Users.Domain;
@@ -27,7 +28,7 @@ namespace Users.L0Tests
             _target = _contextBuilder.GetHttpClient();
         }
 
-        [Fact]
+        [Fact/*, TestScenarioId("CoreFunctionality")*/]
         public async Task GetUserMustReturnRequestedUser()
         {
             // Given aka. Arrange aka. setup initial context/state:
@@ -50,13 +51,14 @@ namespace Users.L0Tests
                 () => Assert.Empty(actualUser.Invoices.First().InvoiceLines));
         }
 
-        [Fact]
-        public async Task GetUserMustReturnRequestedUserWhenUserRowIsBuiltUsingABuilder() // Slightly contrived, but I wanted to show how to build a value.
+        [Fact, TestScenarioId("CoreFunctionality")]
+        public async Task GetUserMustReturnRequestedUserWhenThereIsNoAddressRow()
         {
             const int userId = 42;
             const string userName = "John Doe";
             // Given aka. Arrange aka. setup initial context/state:
             _contextBuilder 
+                // Slightly contrived, but I wanted to show how to build a value:
                 .WithData(new UserRowBuilder().WithUserId(userId).WithName(userName).Build())
                 .Build();
 
