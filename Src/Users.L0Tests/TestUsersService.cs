@@ -28,7 +28,7 @@ namespace Users.L0Tests
             _target = _contextBuilder.GetHttpClient();
         }
 
-        [Fact/*, TestScenarioId("CoreFunctionality")*/]
+        [Fact, TestScenarioId("CoreFunctionality")]
         public async Task GetUserMustReturnRequestedUser()
         {
             // Given aka. Arrange aka. setup initial context/state:

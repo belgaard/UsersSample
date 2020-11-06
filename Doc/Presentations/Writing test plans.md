@@ -14,20 +14,19 @@ Documenting test cases and your reasoning
 
 <!-- slide -->
 
-Test plans document
+## Test plans document
 
 - what we will test in functional terms, and
-- why we have chosen to test that
 
-Test cases are implemented in code
+- Test cases are implemented in code <!-- .element: class="fragment" data-fragment-index="1" -->
 
-Test plans and test cases are linked by tooling
+- Test plans and test cases are linked by tooling <!-- .element: class="fragment" data-fragment-index="2" -->
 
-This way, we avoid redundancy
+- This way, we avoid redundancy <!-- .element: class="fragment" data-fragment-index="3" -->
 
 <!-- slide -->
 
-Principles
+## Principles
 
 - Combinatorial testing
   - Mathematical approach, *pairwise* or *all ways*

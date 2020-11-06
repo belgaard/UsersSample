@@ -11,7 +11,7 @@ This is illustrated in the drawing below,
 
 Scenarios serve to group tests into buckets, each with a meaningful and unique names. In a test report, you will see these names as headlines above each group of tests.
 
-| Scenario                    | Scenario Id       |
+| Scenario                    | ScenarioId       |
 |-----------------------------|-------------------|
 | Simple validation of values | Validation        |
 | Retrieve user information   | CoreFunctionality |
@@ -21,11 +21,12 @@ Scenarios serve to group tests into buckets, each with a meaningful and unique n
 The set of *dimensions* influence the outcome of our tests.
 Dimensions,
 
-- UserId: Valid, ~NotValid
-- includeInvoices: true, false
-- InvoiceDto: 0, 1
-- UserRow: Exists, ~DoesNotExist
-- AddressRow: Exists, ~DoesNotExist
+| Dimension | Values | Comment |
+|---|---| - |
+| UserId  |  Valid or not valid | Any positive integer is accepted as valid. |
+| InvoiceDto  |  None or a single | We are not concerned about the details, only if the user has one. |
+| UserRow  |  Exists or does not exist |  |
+| AddressRow  |  Exists or does not exist |
 
 In order to reduce the number of combinations, we will handle invalid values in the below table. The two dimensions, includeInvoices and InvoiceDto, are not mentioned because they do not have any invalid values - any will do.
 
