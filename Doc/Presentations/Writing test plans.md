@@ -14,15 +14,21 @@ Documenting test cases and your reasoning
 
 <!-- slide -->
 
-## Test plans document
+## A Test plan documents
 
-- what we will test in functional terms, and
+- *what* we will test, and
+- *why* we will test that <!-- .element: class="fragment" data-fragment-index="1" -->
+- in functional terms <!-- .element: class="fragment" data-fragment-index="2" -->
 
-- Test cases are implemented in code <!-- .element: class="fragment" data-fragment-index="1" -->
+<!-- slide -->
 
-- Test plans and test cases are linked by tooling <!-- .element: class="fragment" data-fragment-index="2" -->
+## Test plan test cases
 
-- This way, we avoid redundancy <!-- .element: class="fragment" data-fragment-index="3" -->
+- Test cases are implemented in code
+
+- Test plans and test cases are linked by tooling <!-- .element: class="fragment" data-fragment-index="1" -->
+
+- This way, we avoid redundancy <!-- .element: class="fragment" data-fragment-index="2" -->
 
 <!-- slide -->
 
