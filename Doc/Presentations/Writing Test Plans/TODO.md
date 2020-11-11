@@ -14,7 +14,7 @@ Documenting test cases and your reasoning
 
 <!-- slide -->
 
-## A Test plan documents
+## A Test plan document
 
 - *what* we will test, and
 - *why* we will test that <!-- .element: class="fragment" data-fragment-index="1" -->
@@ -22,13 +22,21 @@ Documenting test cases and your reasoning
 
 <!-- slide -->
 
-## Test plan test cases
+## Test cases
 
-- Test cases are implemented in code
-
-- Test plans and test cases are linked by tooling <!-- .element: class="fragment" data-fragment-index="1" -->
+- Test case steps are put in code <!-- .element: class="fragment" data-fragment-index="1" -->
 
 - This way, we avoid redundancy <!-- .element: class="fragment" data-fragment-index="2" -->
+
+<!-- slide -->
+
+## Test analysis
+
+State which will affect the outcome of test execution
+
+- Input parameters  <!-- .element: class="fragment" data-fragment-index="1" -->
+
+- Initial state <!-- .element: class="fragment" data-fragment-index="2" -->
 
 <!-- slide -->
 
