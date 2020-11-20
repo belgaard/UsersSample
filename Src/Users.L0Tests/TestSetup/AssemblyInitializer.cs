@@ -1,6 +1,7 @@
 ﻿using LeanTest;
-using LeanTest.Core.ExecutionHandling;
 using LeanTest.Xunit;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
 using Users.L0Tests.TestSetup;
 using Users.L0Tests.TestSetup.IoC;
 
@@ -14,10 +15,18 @@ namespace Users.L0Tests.TestSetup
     {
         public AssemblyInitializer()
         {
-            static ICreateContextBuilder FactoryFactory() =>
-                new LeanTestWebApplicationFactory<Startup>(L0CompositionRootForTest.Initialize, provider => new IocContainer(provider));
-
-            ContextBuilderFactory.Initialize(FactoryFactory);
+            // The .NET Core web application factory is documented here
+            // https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1?view=aspnetcore-3.0&viewFallbackFrom=aspnetcore-3.1
+            static WebApplicationFactory<Startup> FactoryFactory()
+            {
+                var factory = new WebApplicationFactory<Startup>();
+                factory = factory.WithWebHostBuilder(builder =>
+                    builder
+                        .ConfigureTestServices(L0CompositionRootForTest.Initialize));
+ 
+                return factory;
+            }
+            AspNetCoreContextBuilderFactory.Initialize(FactoryFactory, provider => new IocContainer(provider));
         }
     }
 }
